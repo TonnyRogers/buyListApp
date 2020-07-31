@@ -42,6 +42,18 @@
   },
   "jest": {
     "preset": "@testing-library/react-native",
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.png$": "<rootDir>/jest/RelativeImageStub.js"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/node_modules/react-native/Libraries/react-native/",
+      "<rootDir>/node_modules/react-native/packager/",
+      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
     ],

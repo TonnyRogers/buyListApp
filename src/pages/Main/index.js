@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Text, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useNavigation} from '@react-navigation/native';
 
 import {
   Container,
@@ -22,35 +23,14 @@ import Input from '../../components/TextInput';
 
 const Main = () => {
   const [isNewListModalOpen, setNewListModalOpen] = useState(false);
-  const [lists, setLists] = useState([
-    {
-      id: 1,
-      name: 'Lista de compras do mês',
-      amount: 150.0,
-      products: [
-        {
-          name: 'Papel Higienico',
-          value: 8.5,
-          quantity: 10.0,
-          amount: 85.0,
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Lista de compras de natal de teste para passar o limite',
-      amount: 150.0,
-      products: [
-        {
-          name: 'Papel Higienico 2',
-          value: 8.5,
-          quantity: 10.0,
-          amount: 85.0,
-        },
-      ],
-    },
-  ]);
+  const navigation = useNavigation();
+  const [lists, setLists] = useState([]);
+
   const [listName, setListName] = useState('');
+
+  function listDetail() {
+    navigation.navigate('ListDetail');
+  }
 
   function newListModalClose() {
     setNewListModalOpen(false);
@@ -75,7 +55,7 @@ const Main = () => {
           data={lists}
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => (
-            <ListButton>
+            <ListButton testID={`list-${item.id}`} onPress={() => listDetail()}>
               <ListIcon name="shopping-cart" size={24} color="#FFF" />
               <ListInfo>
                 <ListName>{item.name}</ListName>
@@ -108,7 +88,7 @@ const Main = () => {
           value={listName}
           onChange={setListName}
         />
-        <SubmitButton onPress={handleCreateList}>
+        <SubmitButton testID="new-list-btn-submit" onPress={handleCreateList}>
           <Icon name="check" size={24} color="#FFF" />
         </SubmitButton>
       </Modal>
