@@ -78,7 +78,7 @@ describe('Main page', () => {
   });
 
   it('navigate to list details', async () => {
-    const {findByText, findByTestId, getByText} = render(
+    const {findByText, findByTestId, getByText, findAllByText} = render(
       <MockedNavigator component={Main} />,
     );
 
@@ -92,7 +92,7 @@ describe('Main page', () => {
 
     await fireEvent.press(navigateButton);
 
-    const pageHeader = await getByText('Details');
+    const pageHeader = await findAllByText('Presentes');
 
     await expect(pageHeader).toBeTruthy();
   });

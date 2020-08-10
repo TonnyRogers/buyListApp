@@ -28,8 +28,8 @@ const Main = () => {
 
   const [listName, setListName] = useState('');
 
-  function listDetail() {
-    navigation.navigate('ListDetail');
+  function listDetail(list) {
+    navigation.navigate('ListDetail', {list});
   }
 
   function newListModalClose() {
@@ -55,7 +55,9 @@ const Main = () => {
           data={lists}
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => (
-            <ListButton testID={`list-${item.id}`} onPress={() => listDetail()}>
+            <ListButton
+              testID={`list-${item.id}`}
+              onPress={() => listDetail(item)}>
               <ListIcon name="shopping-cart" size={24} color="#FFF" />
               <ListInfo>
                 <ListName>{item.name}</ListName>
