@@ -1,4 +1,4 @@
-import {all, takeLatest, call, put, delay} from 'redux-saga/effects';
+import {all, takeLatest, call, put} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import {createListSuccess, createListFailure} from './actions';
@@ -16,7 +16,6 @@ export function* createList({payload}) {
     };
 
     let listArray = [];
-    console.tron.log(lists);
     if (lists) {
       listArray = JSON.parse(lists);
 
@@ -24,7 +23,6 @@ export function* createList({payload}) {
 
       listArray.push(newList);
     }
-    console.tron.log(newList);
     yield call(
       [AsyncStorage, 'setItem'],
       '@buyingList:lists',

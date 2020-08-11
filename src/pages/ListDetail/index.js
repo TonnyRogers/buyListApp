@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {
   Container,
@@ -15,6 +16,12 @@ import {
   NewProductButtonText,
   SubmitButton,
 } from './styles';
+
+import {
+  createProductRequest,
+  openCreateProductModal,
+  closeCreateProductModal,
+} from '../../store/modules/products/actions';
 import Products from '../../components/Products';
 import Modal from '../../components/Modal';
 import TextInput from '../../components/TextInput';
@@ -23,49 +30,33 @@ console.disableYellowBox = true;
 
 const ListDetail = ({route}) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const {list} = route.params;
-  const [isNewProductModalVisible, setIsNewProductModalVisible] = useState(
-    false,
-  );
   const [name, setName] = useState('');
   const [quantity, setQuantity] = useState(0);
-  const [unitValue, setUnitValue] = useState(0.0);
+  const [unitPrice, setUnitValue] = useState(0.0);
   const [listTotal, setListTotal] = useState(0.0);
-  const [products, setProducts] = useState([
-    {
-      id: 0,
-      name: '',
-      price: null,
-      quantity: null,
-      amount: null,
-      fake: true,
-    },
-  ]);
+  const products = useSelector((state) => state.products);
+  const isNewProductModalVisible = products.createListModalOpen;
 
   navigation.setOptions({
     title: list.name,
   });
 
-  function toggleNewProducModalVisible() {
-    setIsNewProductModalVisible(!isNewProductModalVisible);
+  function closeProducModal() {
+    dispatch(closeCreateProductModal());
+  }
+
+  function openProducModal() {
+    dispatch(openCreateProductModal());
   }
 
   function handleCreateProduct() {
-    if (!name || !quantity || !unitValue) {
+    if (!name || !quantity || !unitPrice) {
       return;
     }
 
-    const newProduct = {
-      id: products.length + 2,
-      name,
-      quantity,
-      price: unitValue,
-      amount: quantity * unitValue,
-    };
-
-    setProducts([...products, newProduct]);
-    toggleNewProducModalVisible(false);
-    setListTotal(quantity * unitValue + listTotal);
+    dispatch(createProductRequest({name, unitPrice, quantity}));
     setName('');
     setQuantity('');
     setUnitValue('');
@@ -74,12 +65,12 @@ const ListDetail = ({route}) => {
   return (
     <Container>
       <ProductList
-        data={products}
+        data={products.data}
         keyExtractor={(item) => String(item.id)}
         numColumns={2}
         renderItem={({item}) =>
           item.fake ? (
-            <NewProductButton onPress={toggleNewProducModalVisible}>
+            <NewProductButton onPress={openProducModal}>
               <NewProductButtonText>Novo</NewProductButtonText>
             </NewProductButton>
           ) : (
@@ -101,7 +92,7 @@ const ListDetail = ({route}) => {
       <Modal
         title="Novo Produto"
         visible={isNewProductModalVisible}
-        onRequestClose={toggleNewProducModalVisible}>
+        onRequestClose={closeProducModal}>
         <TextInput
           placeholder="Nome do Produto"
           value={name}
@@ -115,7 +106,7 @@ const ListDetail = ({route}) => {
         />
         <TextInput
           placeholder="Valor unitário"
-          value={unitValue}
+          value={unitPrice}
           onChange={setUnitValue}
           keyboardType="numeric"
         />

@@ -38,3 +38,13 @@ export const Price = styled.Text`
   font-size: 16px;
   color: ${(props) => (props.selected ? '#FFF' : '#000')};
 `;
+
+export const SubmitButton = styled.TouchableOpacity`
+  height: 48px;
+  width: 48px;
+  border-radius: 24px;
+  background: #028090;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+`;
