@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Text, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {
   Container,
@@ -18,13 +19,19 @@ import {
   SubmitButton,
 } from './styles';
 
+import {
+  createListRequest,
+  closeListModal,
+  openListModal,
+} from '../../store/modules/list/actions';
 import Modal from '../../components/Modal';
 import Input from '../../components/TextInput';
 
 const Main = () => {
-  const [isNewListModalOpen, setNewListModalOpen] = useState(false);
   const navigation = useNavigation();
-  const [lists, setLists] = useState([]);
+  const lists = useSelector((state) => state.list);
+  const dispatch = useDispatch();
+  const isNewListModalOpen = lists.creatListModalOpen;
 
   const [listName, setListName] = useState('');
 
@@ -33,15 +40,19 @@ const Main = () => {
   }
 
   function newListModalClose() {
-    setNewListModalOpen(false);
+    dispatch(closeListModal());
+  }
+
+  function newListModalOpen() {
+    dispatch(openListModal());
   }
 
   function handleCreateList() {
     if (!listName) {
       return;
     }
-    const newList = {id: lists.length + 2, name: listName};
-    setLists([...lists, newList]);
+
+    dispatch(createListRequest(listName));
     setListName('');
     newListModalClose();
   }
@@ -52,7 +63,7 @@ const Main = () => {
         <Title>Suas Listas de Compras</Title>
         <BuyListener
           testID="list-list"
-          data={lists}
+          data={lists.data}
           keyExtractor={(item) => String(item.id)}
           renderItem={({item}) => (
             <ListButton
@@ -73,9 +84,7 @@ const Main = () => {
         />
       </Content>
 
-      <NewListButton
-        testID="new-list-btn"
-        onPress={() => setNewListModalOpen(true)}>
+      <NewListButton testID="new-list-btn" onPress={newListModalOpen}>
         <Icon name="add-shopping-cart" size={24} color="#00a896" />
       </NewListButton>
 
