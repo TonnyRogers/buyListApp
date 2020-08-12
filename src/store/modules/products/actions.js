@@ -41,3 +41,62 @@ export function closeEditProductModal() {
     type: '@products/CLOSE_EDIT_PRODUCT_MODAL',
   };
 }
+
+export function getProductsRequest(listId) {
+  return {
+    type: '@products/GET_PRODUCTS_REQUEST',
+    payload: {listId},
+  };
+}
+
+export function getProductsSuccess(products) {
+  return {
+    type: '@products/GET_PRODUCTS_SUCCESS',
+    payload: {products},
+  };
+}
+
+export function getProductsFailure() {
+  return {
+    type: '@products/GET_PRODUCTS_FAILURE',
+  };
+}
+
+export function updateProductRequest(data) {
+  return {
+    type: '@products/UPDATE_PRODUCT_REQUEST',
+    payload: {data},
+  };
+}
+
+export function updateProductSuccess(product) {
+  return {
+    type: '@products/UPDATE_PRODUCT_SUCCESS',
+    payload: {product},
+  };
+}
+
+export function updateProductFailure() {
+  return {
+    type: '@products/UPDATE_PRODUCT_FAILURE',
+  };
+}
+
+export function deleteProductRequest(productId) {
+  return {
+    type: '@products/DELETE_PRODUCT_REQUEST',
+    payload: {productId},
+  };
+}
+
+export function deleteProductSuccess() {
+  return {
+    type: '@products/DELETE_PRODUCT_SUCCESS',
+  };
+}
+
+export function deleteProductFailure() {
+  return {
+    type: '@products/DELETE_PRODUCT_FAILURE',
+  };
+}

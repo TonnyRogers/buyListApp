@@ -3,13 +3,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
-  Container,
   ProducButton,
   ProductDetails,
   Name,
   ProductPrice,
   Price,
   SubmitButton,
+  ActionsContent,
+  DeleteButton,
+  ModalContainer,
 } from './styles';
 import Modal from '../Modal';
 import TextInput from '../TextInput';
@@ -17,7 +19,11 @@ import TextInput from '../TextInput';
 import {
   openEditProductModal,
   closeEditProductModal,
+  updateProductRequest,
+  deleteProductRequest,
 } from '../../store/modules/products/actions';
+
+import {setListTotal} from '../../store/modules/list/actions';
 
 const Products = ({item}) => {
   const [isSelected, setIsSelected] = useState(false);
@@ -25,10 +31,11 @@ const Products = ({item}) => {
   const isModalVisible = products.editListModalOpen;
   const [name, setName] = useState(item.name);
   const [quantity, setQuantity] = useState(item.quantity);
-  const [unitPrice, setUnitValue] = useState(item.price);
+  const [unitPrice, setUnitPrice] = useState(item.price);
   const dispatch = useDispatch();
 
-  function selectProduct() {
+  function handleSelectProduct(product) {
+    dispatch(setListTotal(product));
     setIsSelected(!isSelected);
   }
 
@@ -40,10 +47,25 @@ const Products = ({item}) => {
     dispatch(closeEditProductModal());
   }
 
+  function handleUpdateProduct(productId) {
+    dispatch(
+      updateProductRequest({
+        name,
+        quantity,
+        unitPrice,
+        productId,
+      }),
+    );
+  }
+
+  function handleDeleteProduct(productId) {
+    dispatch(deleteProductRequest(productId));
+  }
+
   return (
     <>
       <ProducButton
-        onPress={selectProduct}
+        onPress={() => handleSelectProduct(item)}
         onLongPress={openEditProduct}
         selected={isSelected}>
         <ProductDetails>
@@ -57,26 +79,33 @@ const Products = ({item}) => {
         title="Editar"
         visible={isModalVisible}
         onRequestClose={closeEditProduct}>
-        <TextInput
-          placeholder="Nome do Produto"
-          value={name}
-          onChange={setName}
-        />
-        <TextInput
-          placeholder="Quantidade"
-          value={quantity}
-          onChange={setQuantity}
-          keyboardType="numeric"
-        />
-        <TextInput
-          placeholder="Valor unitário"
-          value={unitPrice}
-          onChange={setUnitValue}
-          keyboardType="numeric"
-        />
-        <SubmitButton onPress={() => {}}>
-          <Icon name="check" size={24} color="#FFF" />
-        </SubmitButton>
+        <ModalContainer>
+          <TextInput
+            placeholder="Nome do Produto"
+            value={name}
+            onChange={setName}
+          />
+          <TextInput
+            placeholder="Quantidade"
+            value={quantity}
+            onChange={setQuantity}
+            keyboardType="numeric"
+          />
+          <TextInput
+            placeholder="Valor unitário"
+            value={unitPrice}
+            onChange={setUnitPrice}
+            keyboardType="numeric"
+          />
+          <ActionsContent>
+            <SubmitButton onPress={() => handleUpdateProduct(item.id)}>
+              <Icon name="check" size={24} color="#FFF" />
+            </SubmitButton>
+            <DeleteButton onPress={() => handleDeleteProduct(item.id)}>
+              <Icon name="delete" size={24} color="#FFF" />
+            </DeleteButton>
+          </ActionsContent>
+        </ModalContainer>
       </Modal>
     </>
   );

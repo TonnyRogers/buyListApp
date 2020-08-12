@@ -17,7 +17,13 @@ export default function Routes() {
           component={Main}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="ListDetail" component={ListDetail} options={{}} />
+        <Stack.Screen
+          name="ListDetail"
+          component={ListDetail}
+          options={{
+            headerTitleAlign: 'center',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

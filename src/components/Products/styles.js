@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View``;
 
@@ -39,6 +40,8 @@ export const Price = styled.Text`
   color: ${(props) => (props.selected ? '#FFF' : '#000')};
 `;
 
+export const ModalContainer = styled.View``;
+
 export const SubmitButton = styled.TouchableOpacity`
   height: 48px;
   width: 48px;
@@ -47,4 +50,22 @@ export const SubmitButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   align-self: center;
+  margin-right: 10px;
+`;
+
+export const ActionsContent = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DeleteButton = styled.TouchableOpacity`
+  height: 48px;
+  width: 48px;
+  border-radius: 24px;
+  background: #028090;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-left: 10px;
 `;

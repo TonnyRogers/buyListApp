@@ -17,7 +17,7 @@ export const ListAmount = styled.View`
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  border: 1px dashed #028090;
+  border: 2px dashed #028090;
   margin: 15px 10px;
   height: 44px;
 `;

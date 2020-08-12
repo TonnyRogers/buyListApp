@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {Text, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';

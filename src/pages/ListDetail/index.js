@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {LogBox} from 'react-native';
 
 import {
   Container,
@@ -21,12 +22,13 @@ import {
   createProductRequest,
   openCreateProductModal,
   closeCreateProductModal,
+  getProductsRequest,
 } from '../../store/modules/products/actions';
 import Products from '../../components/Products';
 import Modal from '../../components/Modal';
 import TextInput from '../../components/TextInput';
 
-console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 
 const ListDetail = ({route}) => {
   const navigation = useNavigation();
@@ -37,7 +39,12 @@ const ListDetail = ({route}) => {
   const [unitPrice, setUnitValue] = useState(0.0);
   const [listTotal, setListTotal] = useState(0.0);
   const products = useSelector((state) => state.products);
+  const selectedList = useSelector((state) => state.list.selectedProducts);
   const isNewProductModalVisible = products.createListModalOpen;
+
+  useEffect(() => {
+    dispatch(getProductsRequest(list.id));
+  }, [list, dispatch]);
 
   navigation.setOptions({
     title: list.name,
@@ -51,12 +58,12 @@ const ListDetail = ({route}) => {
     dispatch(openCreateProductModal());
   }
 
-  function handleCreateProduct() {
+  function handleCreateProduct(listId) {
     if (!name || !quantity || !unitPrice) {
       return;
     }
 
-    dispatch(createProductRequest({name, unitPrice, quantity}));
+    dispatch(createProductRequest({name, unitPrice, quantity, listId}));
     setName('');
     setQuantity('');
     setUnitValue('');
@@ -110,7 +117,7 @@ const ListDetail = ({route}) => {
           onChange={setUnitValue}
           keyboardType="numeric"
         />
-        <SubmitButton onPress={handleCreateProduct}>
+        <SubmitButton onPress={() => handleCreateProduct(list.id)}>
           <Icon name="check" size={24} color="#FFF" />
         </SubmitButton>
       </Modal>

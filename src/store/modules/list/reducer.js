@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   data: [],
   loading: false,
   creatListModalOpen: false,
+  selectedProducts: [],
 };
 
 export default function list(state = INITIAL_STATE, action) {
@@ -29,6 +30,18 @@ export default function list(state = INITIAL_STATE, action) {
       }
       case '@list/CREATE_LIST_FAILURE': {
         draft.loading = false;
+        break;
+      }
+      case '@list/SET_LIST_TOTAL': {
+        const {product} = action.payload;
+        const isInTotalList = draft.selectedProducts.findIndex(
+          (filtered) => filtered.id === product.id,
+        );
+        if (isInTotalList !== -1) {
+          draft.selectedProducts.splice(isInTotalList, 1);
+        } else {
+          draft.selectedProducts = [draft.selectedProducts, product];
+        }
         break;
       }
       default:

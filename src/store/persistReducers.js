@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'buyinlistapp2020',
       storage: AsyncStorage,
-      whitelist: ['list', 'product'],
+      whitelist: ['list', 'products'],
     },
     reducers,
   );

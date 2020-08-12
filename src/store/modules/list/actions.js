@@ -29,3 +29,10 @@ export function createListFailure() {
     type: '@list/CREATE_LIST_FAILURE',
   };
 }
+
+export function setListTotal(product) {
+  return {
+    type: '@list/SET_LIST_TOTAL',
+    payload: {product},
+  };
+}
