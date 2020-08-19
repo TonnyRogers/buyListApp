@@ -29,9 +29,9 @@ const Products = ({item}) => {
   const [isSelected, setIsSelected] = useState(false);
   const products = useSelector((state) => state.products);
   const isModalVisible = products.editListModalOpen;
-  const [name, setName] = useState(item.name);
-  const [quantity, setQuantity] = useState(item.quantity);
-  const [unitPrice, setUnitPrice] = useState(item.price);
+  const [name, setName] = useState(null);
+  const [quantity, setQuantity] = useState(null);
+  const [unitPrice, setUnitPrice] = useState(null);
   const dispatch = useDispatch();
 
   function handleSelectProduct(product) {
@@ -39,12 +39,18 @@ const Products = ({item}) => {
     setIsSelected(!isSelected);
   }
 
-  function openEditProduct() {
+  function openEditProduct(product) {
+    setName(product.name);
+    setQuantity(product.quantity);
+    setUnitPrice(product.price);
     dispatch(openEditProductModal());
   }
 
   function closeEditProduct() {
     dispatch(closeEditProductModal());
+    setName(null);
+    setQuantity(null);
+    setUnitPrice(null);
   }
 
   function handleUpdateProduct(productId) {
@@ -66,7 +72,7 @@ const Products = ({item}) => {
     <>
       <ProducButton
         onPress={() => handleSelectProduct(item)}
-        onLongPress={openEditProduct}
+        onLongPress={() => openEditProduct(item)}
         selected={isSelected}>
         <ProductDetails>
           <Name>{item.name}</Name>
@@ -75,38 +81,40 @@ const Products = ({item}) => {
           <Price selected={isSelected}>R${item.amount}</Price>
         </ProductPrice>
       </ProducButton>
-      <Modal
-        title="Editar"
-        visible={isModalVisible}
-        onRequestClose={closeEditProduct}>
-        <ModalContainer>
-          <TextInput
-            placeholder="Nome do Produto"
-            value={name}
-            onChange={setName}
-          />
-          <TextInput
-            placeholder="Quantidade"
-            value={quantity}
-            onChange={setQuantity}
-            keyboardType="numeric"
-          />
-          <TextInput
-            placeholder="Valor unitário"
-            value={unitPrice}
-            onChange={setUnitPrice}
-            keyboardType="numeric"
-          />
-          <ActionsContent>
-            <SubmitButton onPress={() => handleUpdateProduct(item.id)}>
-              <Icon name="check" size={24} color="#FFF" />
-            </SubmitButton>
-            <DeleteButton onPress={() => handleDeleteProduct(item.id)}>
-              <Icon name="delete" size={24} color="#FFF" />
-            </DeleteButton>
-          </ActionsContent>
-        </ModalContainer>
-      </Modal>
+      {name && (
+        <Modal
+          title="Editar"
+          visible={isModalVisible}
+          onRequestClose={closeEditProduct}>
+          <ModalContainer>
+            <TextInput
+              placeholder="Nome do Produto"
+              value={name}
+              onChange={setName}
+            />
+            <TextInput
+              placeholder="Quantidade"
+              value={quantity}
+              onChange={setQuantity}
+              keyboardType="numeric"
+            />
+            <TextInput
+              placeholder="Valor unitário"
+              value={unitPrice}
+              onChange={setUnitPrice}
+              keyboardType="numeric"
+            />
+            <ActionsContent>
+              <SubmitButton onPress={() => handleUpdateProduct(item.id)}>
+                <Icon name="check" size={24} color="#FFF" />
+              </SubmitButton>
+              <DeleteButton onPress={() => handleDeleteProduct(item.id)}>
+                <Icon name="delete" size={24} color="#FFF" />
+              </DeleteButton>
+            </ActionsContent>
+          </ModalContainer>
+        </Modal>
+      )}
     </>
   );
 };

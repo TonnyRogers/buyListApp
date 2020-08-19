@@ -17,6 +17,10 @@ import {
   NewProductButtonText,
   SubmitButton,
 } from './styles';
+import Products from '../../components/Products';
+import Modal from '../../components/Modal';
+import Header from '../../components/Header';
+import TextInput from '../../components/TextInput';
 
 import {
   createProductRequest,
@@ -24,9 +28,8 @@ import {
   closeCreateProductModal,
   getProductsRequest,
 } from '../../store/modules/products/actions';
-import Products from '../../components/Products';
-import Modal from '../../components/Modal';
-import TextInput from '../../components/TextInput';
+
+import {cleanListTotal} from '../../store/modules/list/actions';
 
 LogBox.ignoreAllLogs();
 
@@ -39,16 +42,22 @@ const ListDetail = ({route}) => {
   const [unitPrice, setUnitValue] = useState(0.0);
   const [listTotal, setListTotal] = useState(0.0);
   const products = useSelector((state) => state.products);
-  const selectedList = useSelector((state) => state.list.selectedProducts);
+  const selectedProducts = useSelector((state) => state.list.selectedProducts);
   const isNewProductModalVisible = products.createListModalOpen;
 
   useEffect(() => {
     dispatch(getProductsRequest(list.id));
-  }, [list, dispatch]);
 
-  navigation.setOptions({
-    title: list.name,
-  });
+    let totalList = 0;
+
+    selectedProducts.map((product) => {
+      if (product.listId === list.id) {
+        totalList += product.amount;
+      }
+    });
+
+    setListTotal(totalList);
+  }, [list, dispatch, selectedProducts]);
 
   function closeProducModal() {
     dispatch(closeCreateProductModal());
@@ -69,8 +78,14 @@ const ListDetail = ({route}) => {
     setUnitValue('');
   }
 
+  function handlePressBack() {
+    dispatch(cleanListTotal());
+    navigation.navigate('Main');
+  }
+
   return (
     <Container>
+      <Header handlePressBack={handlePressBack} list={list} />
       <ProductList
         data={products.data}
         keyExtractor={(item) => String(item.id)}

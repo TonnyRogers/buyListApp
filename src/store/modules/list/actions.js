@@ -36,3 +36,9 @@ export function setListTotal(product) {
     payload: {product},
   };
 }
+
+export function cleanListTotal() {
+  return {
+    type: '@list/CLEAN_LIST_TOTAL',
+  };
+}

@@ -37,11 +37,18 @@ export default function list(state = INITIAL_STATE, action) {
         const isInTotalList = draft.selectedProducts.findIndex(
           (filtered) => filtered.id === product.id,
         );
+
+        console.tron.log(product);
+        console.tron.log(isInTotalList);
         if (isInTotalList !== -1) {
           draft.selectedProducts.splice(isInTotalList, 1);
         } else {
-          draft.selectedProducts = [draft.selectedProducts, product];
+          draft.selectedProducts = [...draft.selectedProducts, product];
         }
+        break;
+      }
+      case '@list/CLEAN_LIST_TOTAL': {
+        draft.selectedProducts = [];
         break;
       }
       default:
