@@ -37,7 +37,7 @@
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^3.1.0",
-    "@testing-library/react-native": "^6.0.0",
+    "@testing-library/react-native": "^7.0.2",
     "@types/jest": "^26.0.7",
     "babel-jest": "^25.1.0",
     "eslint": "^7.5.0",
@@ -49,28 +49,7 @@
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-test-renderer": "16.13.1",
-    "redux-mock-store": "^1.5.4"
-  },
-  "jest": {
-    "preset": "@testing-library/react-native",
-    "moduleNameMapper": {
-      "^[./a-zA-Z0-9$_-]+\\.png$": "<rootDir>/jest/RelativeImageStub.js"
-    },
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/node_modules/react-native/Libraries/react-native/",
-      "<rootDir>/node_modules/react-native/packager/",
-      "node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)"
-    ],
-    "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.test.js"
-    ],
-    "coverageDirectory": "__tests__/coverage"
+    "redux-mock-store": "^1.5.4",
+    "redux-thunk": "^2.3.0"
   }
 }

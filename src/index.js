@@ -1,5 +1,6 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 
@@ -12,7 +13,9 @@ const App = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
-        <Routes />
+        <NavigationContainer>
+          <Routes />
+        </NavigationContainer>
       </PersistGate>
     </Provider>
   );

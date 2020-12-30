@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main page open create new list modal 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexDirection": "column",
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "justifyContent": "space-between",
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(255, 255, 255, 0.5)",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginBottom": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
+            "marginTop": 50,
+            "paddingBottom": 12,
+            "paddingLeft": 12,
+            "paddingRight": 12,
+            "paddingTop": 12,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "fontSize": 24,
+              "fontWeight": "700",
+              "marginBottom": 20,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Suas Listas de Compras
+      </Text>
+      <RCTScrollView
+        disableVirtualization={false}
+        horizontal={false}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        onEndReachedThreshold={2}
+        removeClippedSubviews={false}
+        scrollEventThrottle={50}
+        stickyHeaderIndices={Array []}
+        style={
+          Array [
+            Object {},
+          ]
+        }
+        testID="list-list"
+        updateCellsBatchingPeriod={50}
+        viewabilityConfigCallbackPairs={Array []}
+        windowSize={21}
+      >
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "borderColor": "#028090",
+                  "borderRadius": 4,
+                  "borderStyle": "dashed",
+                  "borderWidth": 1,
+                  "flexDirection": "row",
+                  "marginBottom": 5,
+                  "marginLeft": 0,
+                  "marginRight": 0,
+                  "marginTop": 5,
+                  "paddingBottom": 12,
+                  "paddingLeft": 12,
+                  "paddingRight": 12,
+                  "paddingTop": 12,
+                },
+              ]
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#028090",
+                    "fontSize": 24,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              
+            </Text>
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#028090",
+                    "fontSize": 16,
+                    "marginLeft": 8,
+                  },
+                ]
+              }
+            >
+              Você não possui listas
+            </Text>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-end",
+          "backgroundColor": "rgba(255, 255, 255, 0.3)",
+          "borderRadius": 24,
+          "height": 48,
+          "justifyContent": "center",
+          "marginBottom": 12,
+          "marginRight": 12,
+          "opacity": 1,
+          "width": 48,
+        }
+      }
+      testID="new-list-btn"
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#00a896",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+    <Modal
+      animationType="fade"
+      hardwareAccelerated={false}
+      style={
+        Array [
+          Object {},
+        ]
+      }
+      testID="new-list-modal"
+      transparent={true}
+      visible={false}
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgba(0, 0, 0, 0.6)",
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#fff",
+                "borderRadius": 4,
+                "flexBasis": 0,
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "marginBottom": 20,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 20,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#e1e1e1",
+                  "borderTopLeftRadius": 4,
+                  "borderTopRightRadius": 4,
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "paddingBottom": 10,
+                  "paddingLeft": 10,
+                  "paddingRight": 10,
+                  "paddingTop": 10,
+                },
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "fontSize": 18,
+                    "fontWeight": "bold",
+                  },
+                ]
+              }
+            >
+              Nova Lista
+            </Text>
+            <View
+              accessible={true}
+              focusable={true}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "flex-end",
+                  "backgroundColor": "#028090",
+                  "borderRadius": 24,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                  "width": 30,
+                }
+              }
+              testID="new-list-close-btn"
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": "#FFF",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "Material Icons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <TextInput
+            allowFontScaling={true}
+            placeholder="Dê um nome da sua nova lista"
+            rejectResponderTermination={true}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#f1f1f1",
+                  "borderColor": "#e1e1e1",
+                  "borderRadius": 4,
+                  "borderStyle": "solid",
+                  "borderWidth": 1,
+                  "fontSize": 14,
+                  "height": 46,
+                  "marginBottom": 10,
+                  "marginLeft": 10,
+                  "marginRight": 10,
+                  "marginTop": 40,
+                  "paddingLeft": 8,
+                },
+              ]
+            }
+            testID="new-list-input"
+            underlineColorAndroid="transparent"
+            value=""
+          />
+          <View
+            accessible={true}
+            focusable={true}
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "backgroundColor": "#028090",
+                "borderRadius": 24,
+                "height": 48,
+                "justifyContent": "center",
+                "opacity": 1,
+                "width": 48,
+              }
+            }
+            testID="new-list-btn-submit"
+          >
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#FFF",
+                    "fontSize": 24,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Material Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  </View>
+</View>
+`;

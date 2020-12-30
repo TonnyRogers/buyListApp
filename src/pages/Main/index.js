@@ -26,8 +26,8 @@ import {
 import Modal from '../../components/Modal';
 import Input from '../../components/TextInput';
 
-const Main = () => {
-  const navigation = useNavigation();
+const Main = ({navigation}) => {
+  // const navigation = useNavigation();
   const lists = useSelector((state) => state.list);
   const dispatch = useDispatch();
   const isNewListModalOpen = lists.creatListModalOpen;
